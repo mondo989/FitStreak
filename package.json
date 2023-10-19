@@ -1,0 +1,39 @@
+{
+  "name": "health-metrics-tracker",
+  "version": "1.0.0",
+  "description": "A Telegram bot to track and visualize health metrics.",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "build-sass": "node-sass public/styles -o public/styles"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/health-metrics-tracker.git"
+  },
+  "keywords": [
+    "health",
+    "fitness",
+    "telegram-bot",
+    "firebase",
+    "d3.js",
+    "sass"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "express": "latest",
+    "telegraf": "latest",
+    "firebase": "latest",
+    "d3": "latest",
+    "node-sass": "latest",
+    "dotenv": "latest"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
