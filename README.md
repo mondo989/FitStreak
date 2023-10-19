@@ -14,7 +14,7 @@
 - [License](#license)
 
 ## Introduction
-The Health Metrics Tracker is a comprehensive solution for tracking and monitoring your fitness activities via a Telegram Bot. Whether you want to log your pushups for the day or check your weight trends, this bot makes it seamless. All data is stored securely in Firebase and can be visualized through a local Node.js application.
+FirStreak is way to tracking and monitoring your fitness activities and weight via a Telegram Bot. Whether you want to log your pushups for the day or check your weight trends, this bot makes it seamless. All data is stored securely in Firebase and can be visualized through a local Node.js application.
 
 ## Features
 - Initialize user profile with `/start`
@@ -29,7 +29,7 @@ The Health Metrics Tracker is a comprehensive solution for tracking and monitori
 - Telegram Bot: Telegraf
 - Backend: Node.js, Express
 - Database: Firebase (Firestore/Realtime Database)
-- Frontend: D3.js for data visualization, SASS for styling
+- Frontend: D3.js for data visualization, SASS for styling (Not yet implemnted)
 
 ## Prerequisites
 - Node.js v14.x or higher
