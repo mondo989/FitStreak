@@ -4,7 +4,10 @@ module.exports = (bot) => {
   const {
     recordActivity,
     clearActivity,
-    fetchTodayActivities
+    fetchTodayActivities,
+    getTotalActivitiesSummary,
+    getWeeklyActivitiesSummary,
+    getMonthlyActivitiesSummary  
   } = require('../../services/firebaseService');
 
   const workoutMessages = {
@@ -102,4 +105,65 @@ module.exports = (bot) => {
 
     ctx.replyWithMarkdown(replyMessage);
   });
+
+  // Handle /total command
+  bot.command('total', async (ctx) => {
+    const userId = ctx.from.id;
+    const {
+      activitiesSummary,
+      totalDaysTracked
+    } = await getTotalActivitiesSummary(userId);
+
+    let replyMessage = `Your Total Tracked Workouts!\n`;
+    Object.entries(activitiesSummary).forEach(([activity, count]) => {
+      replyMessage += `${count} ${activity} ${emojiForActivity(activity)}\n`;
+    });
+    replyMessage += `Total days tracked: ${totalDaysTracked}\n\nKeep going!`;
+
+    ctx.reply(replyMessage);
+  });
+
+  // Handle /weekly command
+  bot.command('weekly', async (ctx) => {
+    const userId = ctx.from.id;
+  
+    try {
+      const { activitiesSummary, totalDaysTracked } = await getWeeklyActivitiesSummary(userId);
+  
+      let replyMessage = `Your Weekly Workouts!\n`;
+      Object.entries(activitiesSummary).forEach(([activity, count]) => {
+        replyMessage += `${count} ${activity}\n`; // Add emoji handling if necessary
+      });
+      replyMessage += `Days active this week: ${totalDaysTracked}\n\nKeep it up!`;
+  
+      ctx.reply(replyMessage);
+    } catch (error) {
+      console.error("Error in /weekly command:", error);
+      ctx.reply("An error occurred while fetching weekly activities.");
+    }
+  });
+  
+
+  // Handle /monthly command
+  bot.command('monthly', async (ctx) => {
+  const userId = ctx.from.id;
+
+  try {
+    const { activitiesSummary, totalDaysTracked } = await getMonthlyActivitiesSummary(userId);
+
+    let replyMessage = `Your Monthly Workouts!\n`;
+    Object.entries(activitiesSummary).forEach(([activity, count]) => {
+      replyMessage += `${count} ${activity}\n`; // Add emoji handling if necessary
+    });
+    replyMessage += `Days active this month: ${totalDaysTracked}\n\nGreat job!`;
+
+    ctx.reply(replyMessage);
+  } catch (error) {
+    console.error("Error in /monthly command:", error);
+    ctx.reply("An error occurred while fetching monthly activities.");
+  }
+});
+
+
+
 };
